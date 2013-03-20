@@ -1,0 +1,19 @@
+{
+    "name": "git-starter",
+    "version": "0.0.1",
+    "description": "Git Repository Starter",
+    "main": "src/git-starter.js",
+    "dependencies": {
+        "commander": "*",
+        "async": "*",
+        "mkdirp": "*"
+    },
+    "devDependencies": {
+        "chai": "*",
+        "grunt": "*",
+        "grunt-mocha-test": "*"
+    },
+    "repository": "git://github.com/kawanet/git-starter.git",
+    "author": "@kawanet",
+    "license": "MIT"
+}
