@@ -36,18 +36,30 @@ GitStarter.prototype.applyStarter = function(source, destdir) {
     var srcdir = ".";
     var regexp;
 
+    var remotejobs = [
+        mkdir_job, chdir_job, gitinit_job, gitpull_job, readconfig_job, parseconfig_job, confirm_jobs, findfiles_jobs, applycontext_job
+    ];
+    var localjobs = [
+        mkdir_job, chdir_job, readconfig_job, parseconfig_job, confirm_jobs, gitinit_job, gitpull_job, findfiles_jobs, applycontext_job
+    ];
+
     if (source == null || source === "") {
         self.error("empty source");
     } else if (source.search(/^(https?|git(\+\w)?):/) == 0) {
         srcrepo = source;
-        async.series([
-            mkdir_job, chdir_job, gitinit_job, gitpull_job, readconfig_job, parseconfig_job, confirm_jobs, findfiles_jobs, applycontext_job
-        ], complete_job);
+        async.series(remotejobs, complete_job);
     } else if (source.search(/\.json$/) > -1) {
         srcjson = (source.search(/^\//) == 0) ? source : process.cwd() + "/" + source;
-        async.series([
-            mkdir_job, chdir_job, readconfig_job, parseconfig_job, confirm_jobs, gitinit_job, gitpull_job, findfiles_jobs, applycontext_job
-        ], complete_job);
+        async.series(localjobs, complete_job);
+    } else if (source.search(/^[^\/]+$/) == 0) {
+        srcjson = __dirname + "/../Starters/" + source + "/starter.json";
+        fs.stat(srcjson, function(err, stat) {
+            if (err) {
+                self.error("starter.json not found: " + source);
+            } else {
+                async.series(localjobs, complete_job);
+            }
+        });
     } else {
         self.error("invalid source: " + source);
     }
@@ -250,7 +262,7 @@ GitStarter.prototype.applyStarter = function(source, destdir) {
                 var stat = fs.statSync(ifile);
                 var mode = stat && stat.mode || 0644;
                 fs.writeFile(tfile, out, {encoding: "utf8"}, function(err) {
-                    fs.chmod(tfile, mode, function(err){
+                    fs.chmod(tfile, mode, function(err) {
                         fs.unlink(ifile, function(err) {
                             if (err) {
                                 cb(err);
