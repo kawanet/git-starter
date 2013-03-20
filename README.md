@@ -1,25 +1,9 @@
-# StarterCLI - Node.js Starter Kit for CLI
-
-Node.js Starter Kit for CLI
+# git-starter - initialize git repository with starter kit
 
 ## Usage
 
-```javascript
-    var __short__ = new __module__(program);
-
-    __short__.on("done", function(result) {
-        console.log(result);
-    });
-
-    __short__.on("error", function(err) {
-        console.error(err);
-    });
-
-    __short__.on("info", function(info) {
-        console.log(info);
-    });
-
-    __short__.__method__(input);
+```
+    git-starter git://github.com/kawanet/node-cli-starter.git my-module
 ```
 
 ## Author
