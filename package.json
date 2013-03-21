@@ -2,7 +2,10 @@
     "name": "git-starter",
     "version": "0.0.1",
     "description": "Git Repository Starter",
-    "main": "src/git-starter.js",
+    "main": "lib/git-starter.js",
+    "bin": {
+        "git-starter": "bin/git-starter.cli.js"
+    },
     "dependencies": {
         "commander": "*",
         "async": "*",

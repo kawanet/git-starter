@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var GitStarter = require("./git-starter");
+var GitStarter = require("../lib/git-starter");
 var pkg = require(__dirname + "/../package.json");
 
 var flags = {};

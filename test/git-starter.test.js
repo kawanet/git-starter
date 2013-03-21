@@ -1,7 +1,7 @@
 // starter.test.js
 
 var expect = require('chai').expect;
-var GitStarter = require("../src/git-starter");
+var GitStarter = require("../lib/git-starter");
 
 describe('GitStarter', function() {
 
