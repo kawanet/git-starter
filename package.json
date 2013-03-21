@@ -1,6 +1,6 @@
 {
     "name": "git-starter",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Git Repository Starter",
     "main": "lib/git-starter.js",
     "bin": {
@@ -9,7 +9,8 @@
     "dependencies": {
         "commander": "*",
         "async": "*",
-        "mkdirp": "*"
+        "mkdirp": "*",
+        "rmdir": "*"
     },
     "devDependencies": {
         "chai": "*",

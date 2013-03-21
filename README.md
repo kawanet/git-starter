@@ -1,19 +1,30 @@
-# git-starter - initialize git repository with starter kit
+# git-starter
+
+Initialize git repository with starter skeleton.
 
 ## Installation
 
 ```sh
-   $ npm install -g git-starter
+    npm install -g git-starter
 ```
 
 ## Usage
 
 ```sh
-    # init with bundled starter.json
+    # init with starter.json bundled with git-starter
     git-starter node-cli-starter my-module
 
-    # init with starter.json on github repository
+    # init with starter.json on a remote git repository
     git-starter git://github.com/kawanet/node-cli-starter.git my-module
+
+    # init with starter.json on a local path
+    git-starter ./path/to/some-starter.git my-module
+
+    # then
+    cd my-module
+    git init
+    git add .
+    git commit -m 'first commit'
 ```
 
 ## Example
