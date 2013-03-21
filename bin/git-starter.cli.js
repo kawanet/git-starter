@@ -40,7 +40,7 @@ var starter = new GitStarter(opts, flags);
 
 // success
 starter.on("complete", function(result) {
-    console.log("complete:", result);
+    console.log("completed");
 });
 
 // failure
