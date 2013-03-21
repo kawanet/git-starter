@@ -1,9 +1,43 @@
 # git-starter - initialize git repository with starter kit
 
+## Installation
+
+```sh
+   $ npm install -g git-starter
+```
+
 ## Usage
 
-```
+```sh
+    # init with bundled starter.json
+    git-starter node-cli-starter my-module
+
+    # init with starter.json on github repository
     git-starter git://github.com/kawanet/node-cli-starter.git my-module
+```
+
+## Example
+
+```json
+{
+    "name": "node-cli-starter",
+    "description": "Node.js CLI Module Starter",
+    "repository": "git://github.com/kawanet/node-cli-starter.git",
+    "author": "@kawanet",
+    "starter.version": "1.0",
+    "starter.parameters": {
+        "name": "package name: ex. 'node-my-module'",
+        "description": "module description",
+        "repository": "git repository URL",
+        "author": "module author: ex. '@twitter'",
+        "module": "class name: ex. 'MyModule'",
+        "method": "first method name: ex. 'load'",
+        "short": "short name: ex. 'mymod'"
+    },
+    "starter.skip": [
+        "*.jpg", "*.png", "*.gif"
+    ]
+}
 ```
 
 ## Author
