@@ -35,6 +35,7 @@ GitStarter.prototype.applyStarter = function(source, destdir) {
     var self = this;
     var srcdir = ".";
     var regexp;
+    destdir = path_nomalize(destdir);
 
     var remotejobs = [
         mkdir_job, chdir_job, gitinit_job, gitpull_job, readconfig_job, parseconfig_job, confirm_jobs, findfiles_jobs, applycontext_job
@@ -110,6 +111,7 @@ GitStarter.prototype.applyStarter = function(source, destdir) {
         if (!srcjson) {
             srcjson = process.cwd() + "/" + starter_json;
         }
+        srcjson = path_nomalize(srcjson);
         self.emit("info", "Loading: " + srcjson);
         try {
             config = require(srcjson);
@@ -169,9 +171,15 @@ GitStarter.prototype.applyStarter = function(source, destdir) {
         });
 
         Object.keys(keychk).forEach(function(key) {
+            if (defaults[key] == null) {
+                defaults[key] = "__" + key + "__";
+            }
+        });
+
+        keychk.__STARTER__ = true;
+        Object.keys(keychk).forEach(function(key) {
             var subkey = "__" + key + "__";
-            var defval = "__" + key + "__";
-            context[subkey] = self.opts[key] || defaults[key] || defval;
+            context[subkey] = self.opts[key] || defaults[key] || "";
         });
 
         Object.keys(aliases).forEach(function(val) {
@@ -282,5 +290,15 @@ GitStarter.prototype.applyStarter = function(source, destdir) {
         } else {
             self.emit("complete", list);
         }
+    }
+
+    function path_nomalize(path) {
+        while (1) {
+            var prev = path;
+            path = path.replace(/\/\.\//g, "/");
+            path = path.replace(/\/[^\.\/][^\/]*\/\.\.\//g, "/")
+            if (prev === path) break;
+        }
+        return path;
     }
 };
