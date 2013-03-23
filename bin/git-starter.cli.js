@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var GitStarter = require("../lib/git-starter");
+var colors = require("colors");
 var pkg = require(__dirname + "/../package.json");
 
 var flags = {};
@@ -40,18 +41,18 @@ var starter = new GitStarter(opts, flags);
 
 // success
 starter.on("complete", function(result) {
-    console.log("completed");
+    console.log("completed".blue);
 });
 
 // failure
 starter.on("error", function(err) {
-    console.error("ERROR:", err);
+    console.error(err.toString().inverse.red);
     process.exit(1);
 });
 
 // progress
 starter.on("info", function(info) {
-    console.log(info);
+    console.log(info.toString().cyan);
 });
 
 var source = args[0];
@@ -59,10 +60,10 @@ var dest = args[1] || '.';
 starter.applyStarter(source, dest);
 
 function showHelp(warn) {
-    if (warn) console.warn(warn);
+    if (warn) console.warn(warn.inverse.red);
     var node = process.argv[0].replace(/^.*\//, "");
     var script = process.argv[1].replace(/^.*\//, "");
-    var usage = "Usage: " + node + " " + script + " [starterkit] [dir]\n";
+    var usage = "Usage: " + node + " " + script + " [options] starter-kit <dir>\n";
     console.log(usage);
     process.exit(0);
 }
