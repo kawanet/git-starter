@@ -1,6 +1,6 @@
 {
     "name": "git-starter",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Git Repository Starter",
     "main": "lib/git-starter.js",
     "bin": {
