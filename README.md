@@ -1,6 +1,6 @@
 # git-starter
 
-Initialize git repository with starter skeleton.
+Initialize a project with a starter skeleton on a git repository.
 
 ## Installation
 
@@ -11,14 +11,17 @@ Initialize git repository with starter skeleton.
 ## Usage
 
 ```sh
-    # init with starter.json bundled with git-starter
+    # start with starter.json bundled with git-starter
     git-starter node-cli-starter my-module
 
-    # init with starter.json on a remote git repository
+    # start with starter skeleton on remote git repository
     git-starter git://github.com/kawanet/node-cli-starter.git my-module
 
-    # init with starter.json on a local path
-    git-starter ./path/to/some-starter.git my-module
+    # start with starter skeleton in local git repository
+    git-starter file:///path/to/some-starter/.git my-module
+
+    # start with starter.json specified
+    git-starter ./path/to/starter.json my-module
 
     # then
     cd my-module
@@ -27,7 +30,12 @@ Initialize git repository with starter skeleton.
     git commit -m 'first commit'
 ```
 
-## Example
+## Bundled Starters
+
+- [node-cli-starter](https://github.com/kawanet/node-cli-starter)
+- [nginx-static-starter](https://github.com/kawanet/nginx-static-starter)
+
+## Example: starter.json
 
 ```json
 {
@@ -42,14 +50,18 @@ Initialize git repository with starter skeleton.
         "repository": "git repository URL",
         "author": "module author: ex. '@twitter'",
         "module": "class name: ex. 'MyModule'",
-        "method": "first method name: ex. 'load'",
-        "short": "short name: ex. 'mymod'"
+        "method": "first method name: ex. 'load'"
     },
     "starter.skip": [
         "*.jpg", "*.png", "*.gif"
     ]
 }
 ```
+
+- `name` `description` `repository` `author` : default values for parameters
+- `starter.version` : version number for starter.json format (1.0)
+- `starter.parameters` : list of parameters and descriptions
+- `starter.skip` : filename which will be ignored by git-starter
 
 ## Author
 
